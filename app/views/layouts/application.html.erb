@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Диспетчер</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <!-- <%= csrf_meta_tags %> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Услуги диспетчера по перевозке грузов">
+  <link rel="shortcut icon" href="favicon.ico?v=3" />
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+</head>
+<body>
+
+<%= render "layouts/header" %>
+
+<%= yield %>
+
+<%= render "layouts/footer" %>
+
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+    $(".alert-success").wrap("<div class='tds_modal'></div>");
+
+
+    $(".close").click(function(){
+      $(".tds_modal").hide();
+      $(".alert-success").hide();
+    });
+  });
+
+</script>
+
+</body>
+</html>

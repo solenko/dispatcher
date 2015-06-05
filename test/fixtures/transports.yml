@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  transport_available_from: 2014-10-14
+  transport_available_to: 2014-10-14
+  current_place: MyString
+  is_done: false
+
+two:
+  project_id: 1
+  transport_available_from: 2014-10-14
+  transport_available_to: 2014-10-14
+  current_place: MyString
+  is_done: false

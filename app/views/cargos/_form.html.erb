@@ -1,0 +1,35 @@
+<%= simple_form_for @cargo, :html=> { class: "dp_form" } do |f| %>
+  <% if @cargo.errors.any? %>
+    <div id="error_explanation" class="alert-box error">
+      <h2><%= pluralize(@cargo.errors.count, "error") %> не позволили сохранение заявки на груз:</h2>
+
+      <ul>
+      <% @cargo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <%= f.input :ship_from_date, as: :string, :label => "Дата отправки груза c", input_html: { class: :datepicker } %>
+    <%= f.input :ship_till_date, as: :string, :label => "Дата отправки груза по", input_html: { class: :datepicker } %>
+    <%= f.input :ship_city, :label => "Город отправления " %>
+    <%= f.input :ship_to_city, :label => "Город назначения " %>
+    <%= f.input :description, :label => "Описание груза" %>
+    <%= f.input :transport_type, collection: Cargo::TRANSPORT_TYPES, label: 'Какой нужен транспорт', include_blank: false %>
+
+    <%= f.input :weight, :label => "Сколько весит груз, т" %>
+    <%= f.input :volume, :label => "Объем груза, м\u00B3 (если знаете)" %>
+    <%= f.input :payment_type, collection: Cargo::PAYMENT_TYPES, label: 'Вид платежа', include_blank: false %>
+
+    <%= f.input :payment_amount, :label => "Сумма, грн." %>
+    <%= f.input :phone, as: :tel, :label => "Телефон " %>
+    <%= f.input :email, as: :email, :label => "Email " %>
+    <%= f.input :company_name, :label => "Компания или ФИО" %>
+    <%= f.input :company_type, collection: Cargo::COMPANY_TYPES, label: 'Специфика деятельности', include_blank: false %>
+
+    <div class="actions dp_apply">
+        <%= f.submit 'Отправить заявку' %>
+    </div>
+<% end %>

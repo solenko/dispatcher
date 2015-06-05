@@ -1,0 +1,8 @@
+class Transport < ActiveRecord::Base
+  TRANSPORT_TYPES = ['Цельномет', 'Тент', 'Контейнер', 'Изотерм', 'Реф.', 'Контейнеровоз', 'Бортовая', 'Самосвал', 'Зерновоз', 'Цистерна', 'Негабаритный', 'Платформа', 'Автовоз', 'Окновоз', 'Скотовоз', 'Меблевоз', 'Бензовоз', 'Бетоновоз']
+  COMPANY_TYPES = ['Грузовладелец', 'Перевозчик', 'Диспетчер', 'Экспедитор', 'Логический оператор']
+  PAYMENT_TYPES = ['Наличными', 'Безналичными']
+
+  validates :transport_city, :transport_to_city, :phone, :presence => true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create }, if: "email.present?"
+end

@@ -1,0 +1,183 @@
+
+<div class="tds_wrapper">
+
+  <div class="tds_intro">
+    <div class="tds_logo">
+      <img src="/assets/tds-logo.png" alt="Транспортно-диспетчерская служба">
+    </div>
+
+    <div class="tds_intro_content">
+
+      <p>Добро пожаловать!</p>
+
+      <p>Наш сервис нацелен на объединение грузоперевозчиков и владельцев грузов, чтобы вы могли получить обоюдную пользу.</p>
+
+      <p>Если вы владелец транспорта, вы можете добавить его в нашу базу для поиска заказа на перевозку.</p>
+
+      <p>Если вам нужен транспорт для перевозки груза, вы можете оставить заявку на его транспортировку.</p>
+
+      <p>В обоих случаях наш диспетчер свяжется с вами по телефону и предложит вам оптимальное решение.</p>
+
+      <p>Добавление заявки абсолютно бесплатное. Комиссия в размере 5% взымается только в том случае, если сделка состоялась.</p>
+
+      <p>Если у вас возникли трудности с размещением заявки, обращайтесь по телефону:<br/>
+      (050) 574-15-63<br/>
+      (067) 123-45-67<br/>
+      или отправьте запрос на email: <a href="mailto:support@tds.in.ua">support@tds.in.ua</a></p>
+
+    </div>
+
+  </div>
+
+
+  <div class="tds_actions">
+
+    <a href="transports/new">Добавить транспорт</a>
+    <a href="cargos/new">Добавить груз</a>
+
+    <div class="tds_data">
+
+      <table>
+        <thead>
+
+          <tr>
+            <th colspan="4">Предложения свободного транспорта по Украине</th>
+          </tr>
+
+        </thead>
+        <tbody>
+
+        <% if @transports.blank? %>
+        <tr>
+          <td>
+            <div>Нет свободного транспорта</div>
+          </td>
+        </tr>
+        <% else %>
+
+        <% @transports.each do |transport| %>
+          <tr>
+
+            <td>
+              <p><%= transport.created_at.strftime("%d.%m") %></p>
+              <p><%= transport.created_at.strftime("%H:%M") %></p>
+            </td>
+
+            <td>
+              <p><%= transport.transport_city %> <span>&mdash;</span> <%= transport.transport_to_city %></p>
+              <p>~685 км, <%= transport.transport_type %></p>
+            </td>
+
+            <td>
+              <p>5т</p>
+              <p>&nbsp;</p>
+            </td>
+
+            <td>
+              <p>25 <span>м&sup3;</span></p>
+              <p>&nbsp;</p>
+            </td>
+
+          </tr>
+        <% end %>
+        <% end %>
+
+
+        </tbody>
+      </table>
+
+
+      <table>
+        <thead>
+
+          <tr>
+            <th colspan="4">Заявки на грузоперевозки по Украине</th>
+          </tr>
+
+        </thead>
+        <tbody>
+
+        <% if @cargos.blank? %>
+            <tr>
+              <td>
+                <div>На данный момент заявок нет</div>
+              </td>
+            </tr>
+        <% else %>
+
+        <% @cargos.each do |cargo| %>
+
+          <tr>
+
+            <td>
+              <p><%= cargo.created_at.strftime("%d.%m") %></p>
+              <p><%= cargo.created_at.strftime("%H:%M") %></p>
+            </td>
+
+            <td>
+              <p><%= cargo.ship_city %> <span>&mdash;</span> <%= cargo.ship_to_city %></p>
+              <p>~90 км, <%= cargo.transport_type %></p>
+            </td>
+
+            <td>
+              <p><%= cargo.rounded_weight %></p>
+              <p>&nbsp;</p>
+            </td>
+
+            <td>
+              <p><%= raw cargo.rounded_volume %></p>
+              <p>&nbsp;</p>
+            </td>
+
+          </tr>
+
+        <% end %>
+        <% end %>
+
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <div class="tds_guide">
+
+    <div class="step step1">
+      <h4>Шаг 1</h4>
+      <p>У вас есть товар, который нужно доставить или свободный транспорт?</p>
+      <span><i class="fa fa-long-arrow-left"></i></span>
+      <span><i class="fa fa-long-arrow-right"></i></span>
+      <div><i class="fa fa-desktop"></i></div>
+      <div><i class="fa fa-truck"></i></div>
+    </div>
+
+    <div class="step step2">
+      <h4>Шаг 2</h4>
+      <p>Оставьте заявку</p>
+      <div><i class="fa fa-pencil-square-o"></i></div>
+    </div>
+
+    <div class="step step3">
+      <h4>Шаг 3</h4>
+      <p>Получите подтверждение <br/>по телефону</p>
+      <div><i class="fa fa-check-square-o"></i></div>
+    </div>
+
+  </div>
+
+  <div class="clearfix"></div>
+
+</div>
+
+<% flash.each do |name, msg| %>
+    <% if msg.is_a?(String) %>
+      <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <a href="#" class="close">OK</a>
+      </div>
+  <% end %>
+<% end %>

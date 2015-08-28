@@ -1,3 +1,4 @@
+ENV['RAILS_ENV'] ||= 'production'
 # Set the working application directory
 # working_directory "/path/to/your/app"
 working_directory "/home/rails/dispatcher"
@@ -21,3 +22,7 @@ worker_processes 2
 
 # Time-out
 timeout 30
+
+after_fork do |server, worker|
+  ActiveRecord::Base.establish_connection
+end

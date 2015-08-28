@@ -24,5 +24,5 @@ worker_processes 2
 timeout 30
 
 after_fork do |server, worker|
-  ActiveRecord::Base.establish_connection
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.establish_connection
 end
